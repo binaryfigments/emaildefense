@@ -3,6 +3,7 @@ package emaildefense
 import (
 	"errors"
 	"net"
+	"strconv"
 
 	"github.com/miekg/dns"
 )
@@ -20,7 +21,7 @@ func checkAuthenticatedData(hostname string, nameserver string) (bool, error) {
 	}
 
 	if r.Rcode != dns.RcodeSuccess {
-		err = errors.New("domain lookup not successful")
+		err = errors.New("domain lookup not successfull, code: " + strconv.Itoa(r.Rcode))
 		return false, err
 	}
 
